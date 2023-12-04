@@ -1,132 +1,105 @@
+/* eslint-disable semi */
 /* eslint-disable prettier/prettier */
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type { PropsWithChildren } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
+import React, { useState } from 'react';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import NativeCalculatorApp from './tm/NativeCalculatorApp';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const App = () => {
+  const [x, setX] = useState('');
+  const [y, setY] = useState('');
+  const [result, setResult] = useState('');
 
-function Section({ children, title }: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const handleAddition = () => {
+    if (x !== '' && y !== '') {
+      const sum = NativeCalculatorApp.add(parseFloat(x), parseFloat(y))
+      setResult(`Addition Result: ${sum}`)
+    } else {
+      setResult('Please enter numbers in both fields')
+    }
   };
 
-  const x = 12;
-  const y = 3;
+  const handleSubtraction = () => {
+    if (x !== '' && y !== '') {
+      const diff = NativeCalculatorApp.sub(parseFloat(x), parseFloat(y))
+      setResult(`Subtraction Result: ${diff}`);
+    } else {
+      setResult('Please enter numbers in both fields');
+    }
+  };
+
+  const handleMultiplication = () => {
+    if (x !== '' && y !== '') {
+      const prod = NativeCalculatorApp.mul(parseFloat(x), parseFloat(y))
+      setResult(`Multiplication Result: ${prod}`);
+    } else {
+      setResult('Please enter numbers in both fields');
+    }
+  };
+  const handleDivision = () => {
+    if (x !== '' && y !== '') {
+      const quot = NativeCalculatorApp.div(parseFloat(x), parseFloat(y))
+      setResult(`Division Result: ${quot}`);
+    } else {
+      setResult('Please enter numbers in both fields');
+    }
+  };
+
+
+  // Similarly, you can implement functions for multiplication and division
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter number 1"
+        keyboardType="numeric"
+        value={x}
+        onChangeText={(text) => setX(text)}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Native Calculatotor App Demo">
-            <View>
-              <Text>{x} + {y} = {NativeCalculatorApp.add(x, y)}</Text>
-              <Text>{x} - {y} = {NativeCalculatorApp.sub(x, y)}</Text>
-              <Text>{x} * {y} = {NativeCalculatorApp.mul(x, y)}</Text>
-              <Text>{x} / {y} = {NativeCalculatorApp.div(x, y)}</Text>
-            </View>
-          </Section>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter number 2"
+        keyboardType="numeric"
+        value={y}
+        onChangeText={(text) => setY(text)}
+      />
+      <View style={styles.buttonContainer}>
+        <Button title="Add" onPress={handleAddition} />
+        <Button title="Subtract" onPress={handleSubtraction} />
+        <Button title="Multiply" onPress={handleMultiplication} />
+        <Button title="Divide" onPress={handleDivision} />
+      </View>
+      <Text style={styles.resultText}>{result}</Text>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+    width: '80%',
   },
-  sectionDescription: {
-    marginTop: 8,
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginBottom: 20,
+  },
+  resultText: {
     fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+    fontWeight: 'bold',
   },
 });
 
-export default App;
+export default App
+
