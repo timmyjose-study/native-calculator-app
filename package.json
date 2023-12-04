@@ -1,5 +1,5 @@
 {
-  "name": "native-calculator-app",
+  "name": "NativeCalculatorApp",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -32,5 +32,13 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "codegenConfig": {
+    "name": "AppSpecs",
+    "type": "all",
+    "jsSrcsDir": "tm",
+    "android": {
+      "javaPackageName": "com.facebook.fbreact.specs"
+    }
   }
 }
