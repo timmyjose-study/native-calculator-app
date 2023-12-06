@@ -1,10 +1,12 @@
 #include "NativeCalculatorApp.h"
 
+extern "C" size_t rust_add(size_t x, size_t y);
+
 namespace facebook::react {
 NativeCalculatorApp::NativeCalculatorApp(std::shared_ptr<CallInvoker> jsInvoker)
     : NativeCalculatorAppCxxSpec(std::move(jsInvoker)) {}
 
-int NativeCalculatorApp::add(jsi::Runtime &rt, int x, int y) { return x + y; }
+int NativeCalculatorApp::add(jsi::Runtime &rt, int x, int y) { return rust_add(x, y); }
 int NativeCalculatorApp::sub(jsi::Runtime &rt, int x, int y) { return x - y; }
 int NativeCalculatorApp::mul(jsi::Runtime &rt, int x, int y) { return x * y; }
 int NativeCalculatorApp::div(jsi::Runtime &rt, int x, int y) {

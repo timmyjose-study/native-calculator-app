@@ -13,4 +13,4 @@ add_library(tm STATIC ${tm_SRC})
 target_include_directories(tm PUBLIC .)
 target_include_directories(react_codegen_AppSpecs PUBLIC .)
 
-target_link_libraries(tm jsi react_nativemodule_core react_codegen_AppSpecs)
+target_link_libraries(tm /Users/dwq/Documents/test/native-calculator-app/tm/nativecalc/target/aarch64-linux-android/debug/libnativecalc.a jsi react_nativemodule_core react_codegen_AppSpecs)
