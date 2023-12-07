@@ -19,5 +19,6 @@ public:
   int sub(jsi::Runtime &rt, int x, int y);
   int mul(jsi::Runtime &rt, int x, int y);
   int div(jsi::Runtime &rt, int x, int y);
+  int the_answer(jsi::Runtime &rt);
 };
 } // namespace facebook::react

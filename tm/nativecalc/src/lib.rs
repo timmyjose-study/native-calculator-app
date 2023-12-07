@@ -1,16 +1,28 @@
 #[no_mangle]
-pub extern "C" fn rust_add(left: usize, right: usize) -> usize {
-    panic!("here");
-    left + right
+pub extern "C" fn rust_add(x: i32, y: i32) -> i32 {
+    x + y
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[no_mangle]
+pub extern "C" fn rust_sub(x: i32, y: i32) -> i32 {
+    x - y
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+#[no_mangle]
+pub extern "C" fn rust_mul(x: i32, y: i32) -> i32 {
+    x * y
+}
+
+#[no_mangle]
+pub extern "C" fn rust_div(x: i32, y: i32) -> i32 {
+    if y == 0 {
+        0
+    } else {
+        x / y
     }
+}
+
+#[no_mangle]
+pub extern "C" fn the_answer() -> i32 {
+    42
 }
