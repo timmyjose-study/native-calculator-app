@@ -16,7 +16,7 @@ const App = () => {
     } else {
       setResult('Please enter numbers in both fields')
     }
-  };
+  }
 
   const handleSubtraction = () => {
     if (x !== '' && y !== '') {
@@ -25,7 +25,7 @@ const App = () => {
     } else {
       setResult('Please enter numbers in both fields');
     }
-  };
+  }
 
   const handleMultiplication = () => {
     if (x !== '' && y !== '') {
@@ -34,7 +34,8 @@ const App = () => {
     } else {
       setResult('Please enter numbers in both fields');
     }
-  };
+  }
+
   const handleDivision = () => {
     if (x !== '' && y !== '') {
       const quot = NativeCalculatorApp.div(parseFloat(x), parseFloat(y))
@@ -42,7 +43,12 @@ const App = () => {
     } else {
       setResult('Please enter numbers in both fields');
     }
-  };
+  }
+
+  const handleTheAnswer = () => {
+    const answer = NativeCalculatorApp.the_answer();
+    setResult(`The answer to Life, The Universe, and Everything is: ${answer}`)
+  }
 
 
   // Similarly, you can implement functions for multiplication and division
@@ -68,6 +74,7 @@ const App = () => {
         <Button title="Subtract" onPress={handleSubtraction} />
         <Button title="Multiply" onPress={handleMultiplication} />
         <Button title="Divide" onPress={handleDivision} />
+        <Button title="The Answer" onPress={handleTheAnswer} />
       </View>
       <Text style={styles.resultText}>{result}</Text>
     </View>
@@ -80,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    margin: 10,
   },
   input: {
     borderWidth: 1,
