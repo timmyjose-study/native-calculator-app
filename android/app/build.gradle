@@ -80,6 +80,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        def currentTargetABI = ndk.abiFilters
+        println "Current TARGET PLATFORM = ${currentTargetABI}"
     }
     signingConfigs {
         debug {
